@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoRota RMR - Full Stack</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div>
+                    <h1>EcoRota RMR</h1>
+                    <h2>Otimização Multimodal Sustentável</h2>
+                </div>
+                <button id="theme-toggle" aria-label="Alternar Tema" title="Modo Claro/Escuro">☀️</button>
+            </div>
+        </header>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-title">Configuração da Viagem</div>
+                
+                <div class="form-group">
+                    <label for="origem">Ponto de Origem</label>
+                    <select id="origem">
+                        <option value="se_olinda" selected>Igreja da Sé (Olinda)</option>
+                        <option value="ti_peixinhos">TI Peixinhos</option>
+                        <option value="ti_central">TI Central (Recife)</option>
+                        <option value="est_recife">Estação Recife (Metrô)</option>
+                        <option value="est_joana">Estação Joana Bezerra</option>
+                        <option value="ti_aeroporto">TI Aeroporto</option>
+                        <option value="est_piedade">Estação Metrô Piedade</option>
+                        <option value="piedade_jaboatao">Igrejinha de Piedade (Jaboatão)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="destino">Ponto de Destino</label>
+                    <select id="destino">
+                        <option value="se_olinda">Igreja da Sé (Olinda)</option>
+                        <option value="ti_peixinhos">TI Peixinhos</option>
+                        <option value="ti_central">TI Central (Recife)</option>
+                        <option value="est_recife">Estação Recife (Metrô)</option>
+                        <option value="est_joana">Estação Joana Bezerra</option>
+                        <option value="ti_aeroporto">TI Aeroporto</option>
+                        <option value="est_piedade">Estação Metrô Piedade</option>
+                        <option value="piedade_jaboatao" selected>Igrejinha de Piedade (Jaboatão)</option>
+                    </select>
+                </div>
+
+                <label>Perfil de Viagem</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="perfil" value="eco" checked>
+                        <div><strong>Transporte Público</strong><div class="sub">Ônibus/Metrô: CO₂ Marginal Zero</div></div>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="perfil" value="bike">
+                        <div><strong>Bicicleta (Ativo)</strong><div class="sub">Zero CO₂, Custo R$ 0,00</div></div>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="perfil" value="economica">
+                        <div><strong>Econômica</strong><div class="sub">Equilíbrio entre Transporte e Caminhada</div></div>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="perfil" value="rapida">
+                        <div><strong>Mais Rápida (Carro)</strong><div class="sub">Direto, mas gera emissões diretas</div></div>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="perfil" value="personalizada">
+                        <div><strong>Personalizada</strong><div class="sub">Ajuste Livre de Pesos</div></div>
+                    </label>
+                </div>
+
+                <div class="slider-group">
+                    <div class="slider-title">Pesos de Otimização</div>
+                    <div class="slider-item">
+                        <div class="slider-header"><span>Distância</span><span id="val-distancia">0.1</span></div>
+                        <input type="range" id="prioridade-distancia" min="0" max="3" step="0.1" value="0.1" disabled>
+                    </div>
+                    <div class="slider-item">
+                        <div class="slider-header"><span>Tempo</span><span id="val-tempo">0.2</span></div>
+                        <input type="range" id="prioridade-tempo" min="0" max="3" step="0.1" value="0.2" disabled>
+                    </div>
+                    <div class="slider-item">
+                        <div class="slider-header"><span>Custo (R$)</span><span id="val-custo">1.5</span></div>
+                        <input type="range" id="prioridade-custo" min="0" max="3" step="0.1" value="1.5" disabled>
+                    </div>
+                    <div class="slider-item">
+                        <div class="slider-header"><span>Emissão CO₂</span><span id="val-co2">2.0</span></div>
+                        <input type="range" id="prioridade-co2" min="0" max="3" step="0.1" value="2.0" disabled>
+                    </div>
+                </div>
+
+                <button class="btn" id="btn-calcular">Calcular Rota</button>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Painel de Rotas & Estradas Reais</div>
+                <div class="results-grid">
+                    <div class="result-box"><label>Tempo Estimado</label><div class="result-val" id="res-tempo">-- min</div></div>
+                    <div class="result-box cost"><label>Custo Total</label><div class="result-val" id="res-custo">R$ --</div></div>
+                    <div class="result-box"><label>Distância Total</label><div class="result-val" id="res-distancia">-- km</div></div>
+                    <div class="result-box"><label>Emissão Marginal CO₂</label><div class="result-val" id="res-co2">-- g</div></div>
+                </div>
+
+                <div id="map"></div>
+
+                <div class="impact-banner">
+                    <span class="impact-icon">🌱</span>
+                    <div>
+                        <strong>Impacto Ecológico Gerado</strong>
+                        <div class="sub mt-5">
+                            <span id="res-impacto" class="impact-highlight">0 g</span> de CO₂ evitados vs carro particular.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="itinerary-title">Itinerário Passo a Passo nas Ruas</div>
+                <div id="itinerario-conteudo">
+                    <p class="itinerary-empty">Selecione os pontos e calcule a rota para ver os pontos de troca de transporte.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>
