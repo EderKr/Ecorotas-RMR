@@ -26,14 +26,14 @@ const themeToggle = document.getElementById('theme-toggle');
 const htmlEl = document.documentElement;
 const savedTheme = localStorage.getItem('theme') || 'light';
 htmlEl.setAttribute('data-theme', savedTheme);
-themeToggle.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+themeToggle.textContent = savedTheme === 'light' ? '☀️' : '🌙';
 
 themeToggle.addEventListener('click', () => {
     const currentTheme = htmlEl.getAttribute('data-theme');
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     htmlEl.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
-    themeToggle.textContent = newTheme === 'light' ? '🌙' : '☀️';
+    themeToggle.textContent = newTheme === 'light' ? '☀️' : '🌙';
 });
 
 // Busca a chave no backend e carrega o mapa
